@@ -9,7 +9,7 @@ const URL = 'https://jsonplaceholder.typicode.com/users';
 
 const UserList = () => {
 	const dispatch = useAppDispatch();
-	const { users, loading, error } = useAppSelector((state) => state.users);
+	const { currentUsers, loading, error } = useAppSelector((state) => state.users);
 
 	useEffect(() => {
 		const fetchUsers = async () => {
@@ -58,19 +58,23 @@ const UserList = () => {
 	}
 
 	return (
-		<section className='container w-full mx-auto p-4 rounded-lg bg-sky-700'>
+		<section className='w-full p-4 rounded-lg bg-sky-700'>
 			{error && <p>Error: {error}</p>}
-			<ul className='grid grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-6'>
-				{users.map((user) => (
-					<li key={'user-' + user.id} className='flex'>
-						<NavLink
-							to={`/list/${user.id}`}
-							className='w-full p-4 rounded-lg bg-stone-950 text-white hover:bg-stone-800 ease-in duration-300'>
-							{user.name} ({user.username})
-						</NavLink>
-					</li>
-				))}
-			</ul>
+			{currentUsers.length === 0 ? (
+				<p>No cards found</p>
+			) : (
+				<ul className='grid grid-cols-[repeat(auto-fill,_minmax(18rem,_1fr))] gap-6'>
+					{currentUsers.map((user) => (
+						<li key={'user-' + user.id} className='flex'>
+							<NavLink
+								to={`/list/${user.id}`}
+								className='w-full p-4 rounded-lg bg-stone-950 text-white hover:bg-stone-800 ease-in duration-300'>
+								{user.name} ({user.username})
+							</NavLink>
+						</li>
+					))}
+				</ul>
+			)}
 		</section>
 	);
 };

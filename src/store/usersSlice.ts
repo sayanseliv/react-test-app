@@ -5,6 +5,7 @@ import { getUserByIdThunk } from './usersThunks';
 
 const initialState: UsersState = {
 	users: [],
+	currentUsers: [],
 	currentUser: null,
 	loading: false,
 	error: null,
@@ -16,15 +17,20 @@ export const usersSlice = createSlice({
 	reducers: {
 		getUsers: (state, action: PayloadAction<User[]>) => {
 			state.users = action.payload;
-		},
-		setUsersByName: (state, action: PayloadAction<User[]>) => {
-			state.users = action.payload;
+			state.currentUsers = action.payload;
 		},
 		setLoading: (state, action: PayloadAction<boolean>) => {
 			state.loading = action.payload;
 		},
 		onSearchQuery: (state, action: PayloadAction<string>) => {
 			state.searchQuery = action.payload;
+			state.currentUsers = state.users.filter((item) =>
+				item.name.toLowerCase().includes(action.payload)
+			);
+		},
+		onClearQuery: (state) => {
+			state.currentUsers = state.users;
+			state.searchQuery = '';
 		},
 		setError: (state, action: PayloadAction<string | null>) => {
 			state.error = action.payload;
@@ -51,6 +57,6 @@ export const usersSlice = createSlice({
 			});
 	},
 });
-export const { getUsers, setUsersByName, setLoading, onSearchQuery, setError, clearCurrentUser } =
+export const { getUsers, setLoading, onSearchQuery, setError, clearCurrentUser } =
 	usersSlice.actions;
 export default usersSlice.reducer;

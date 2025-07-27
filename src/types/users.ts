@@ -27,6 +27,7 @@ export interface User {
 }
 export interface UsersState {
 	users: User[];
+	currentUsers: User[];
 	loading: boolean;
 	error: string | null;
 	searchQuery: string;
