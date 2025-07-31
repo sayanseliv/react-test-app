@@ -41,7 +41,7 @@ const getModalVariants = (direction: Direction): Variants => {
 			hidden: {
 				opacity: 0,
 				x: '-50%',
-				y: '-100vh',
+				y: '-100dvh',
 			},
 			visible: {
 				opacity: 1,
@@ -54,7 +54,7 @@ const getModalVariants = (direction: Direction): Variants => {
 			hidden: {
 				opacity: 0,
 				x: '-50%',
-				y: '100vh',
+				y: '100dvh',
 			},
 			visible: {
 				opacity: 1,
@@ -93,7 +93,7 @@ const getModalVariants = (direction: Direction): Variants => {
 			hidden: {
 				opacity: 0,
 				x: '-100vw',
-				y: '-100vh',
+				y: '-100dvh',
 				scale: 0.8,
 			},
 			visible: {
@@ -123,7 +123,7 @@ const getModalVariants = (direction: Direction): Variants => {
 			hidden: {
 				opacity: 0,
 				x: '-100vw',
-				y: '100vh',
+				y: '100dvh',
 				scale: 0.8,
 			},
 			visible: {
@@ -138,7 +138,7 @@ const getModalVariants = (direction: Direction): Variants => {
 			hidden: {
 				opacity: 0,
 				x: '100vw',
-				y: '100vh',
+				y: '100dvh',
 				scale: 0.8,
 			},
 			visible: {
