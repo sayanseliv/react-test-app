@@ -1,11 +1,19 @@
+import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { increment, decrement, incrementByAmount } from '../store/counterSlice';
+import Modal from '../components/Modal/Modal';
 
 const Home = () => {
+	const [showModal, setShowModal] = useState(false);
+
 	const count = useAppSelector((state) => state.counter.value);
 	const dispatch = useAppDispatch();
+
 	const onIncrement = () => dispatch(increment());
 	const onDecrement = () => dispatch(decrement());
+
+	const toggleModal = () => setShowModal((prev) => !prev);
+	const closeModal = () => setShowModal(false);
 	return (
 		<div className='bg-white p-8 rounded-lg shadow-md'>
 			<h1 className='text-3xl font-bold text-center text-gray-800 mb-6'>
@@ -34,6 +42,21 @@ const Home = () => {
 						+5
 					</button>
 				</div>
+				<button
+					onClick={toggleModal}
+					className='mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+					Call Modal
+				</button>
+
+				<Modal show={showModal} onClose={closeModal} direction='top'>
+					<h2>Привет!</h2>
+					<p>Это модальное окно с анимацией 🎉</p>
+					<button
+						onClick={closeModal}
+						className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+						Закрыть
+					</button>
+				</Modal>
 			</div>
 		</div>
 	);
