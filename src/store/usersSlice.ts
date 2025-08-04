@@ -57,6 +57,6 @@ export const usersSlice = createSlice({
 			});
 	},
 });
-export const { getUsers, setLoading, onSearchQuery, setError, clearCurrentUser } =
+export const { getUsers, setLoading, onSearchQuery, setError, clearCurrentUser, onClearQuery } =
 	usersSlice.actions;
 export default usersSlice.reducer;

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import { Suspense, lazy } from 'react';
+import Tasks from './pages/Tasks';
 
 const Home = lazy(() => import('./pages/Home'));
 const List = lazy(() => import('./pages/List'));
@@ -25,6 +26,7 @@ function App() {
 					<Route index element={<Home />}></Route>
 					<Route path='list' element={<List />}></Route>
 					<Route path='/list/:id' element={<ListDetails />} />
+					<Route path='/tasks' element={<Tasks />}></Route>
 					<Route path='*' element={<NotFound />} />
 				</Route>
 			</Routes>

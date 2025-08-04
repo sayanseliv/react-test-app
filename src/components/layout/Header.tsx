@@ -8,12 +8,15 @@ const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
 
 const Header = () => (
 	<header className='bg-neutral-950 py-4'>
-		<nav className='container mx-auto space-x-4 text-sky-700'>
+		<nav className='max-w-7xl w-full mx-auto space-x-4 text-sky-700'>
 			<NavLink to='/' className={getNavLinkClass}>
 				Home
 			</NavLink>
 			<NavLink to='/list' className={getNavLinkClass}>
 				List
+			</NavLink>
+			<NavLink to='/tasks' className={getNavLinkClass}>
+				Tasks
 			</NavLink>
 		</nav>
 	</header>
