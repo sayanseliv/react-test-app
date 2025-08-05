@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { Task } from '../../types/tasks';
 import { useDispatch } from 'react-redux';
 
@@ -29,4 +30,4 @@ const TaskItem = ({ title, id, completed }: Task) => {
 		</div>
 	);
 };
-export default TaskItem;
+export default memo(TaskItem);

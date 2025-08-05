@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import { Suspense, lazy } from 'react';
-import Tasks from './pages/Tasks';
 
 const Home = lazy(() => import('./pages/Home'));
 const List = lazy(() => import('./pages/List'));
 const ListDetails = lazy(() => import('./pages/ListDetails'));
+const Tasks = lazy(() => import('./pages/Tasks'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
