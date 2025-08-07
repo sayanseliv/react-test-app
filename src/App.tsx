@@ -6,6 +6,8 @@ const Home = lazy(() => import('./pages/Home'));
 const List = lazy(() => import('./pages/List'));
 const ListDetails = lazy(() => import('./pages/ListDetails'));
 const Tasks = lazy(() => import('./pages/Tasks'));
+const Projects = lazy(() => import('./pages/Projects'));
+const ProjectsDetails = lazy(() => import('./pages/ProjectsDetails'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
 					<Route index element={<Home />}></Route>
 					<Route path='list' element={<List />}></Route>
 					<Route path='/list/:id' element={<ListDetails />} />
+					<Route path='/projects' element={<Projects />}></Route>
+					<Route path='/projects/:id' element={<ProjectsDetails />}></Route>
 					<Route path='/tasks' element={<Tasks />}></Route>
 					<Route path='*' element={<NotFound />} />
 				</Route>
