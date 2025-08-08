@@ -3,7 +3,7 @@ export type Project = {
 	name: string;
 	description?: string;
 	status: 'active' | 'completed' | 'on-hold' | 'cancelled';
-	createdAt: string;
+	created_at: string;
 	team: Array<{
 		id: number;
 		name: string;
