@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
-import { fetchProjects } from '../store/projectsSlice';
+import { fetchProjects } from '../store/features/projects/projectsSlice';
 import {
 	selectProjects,
 	selectProjectsError,

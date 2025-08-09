@@ -1,6 +1,6 @@
 import type React from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { onSearchQuery, onClearQuery } from '../store/usersSlice';
+import { onSearchQuery, onClearQuery } from '../store/features/users/usersSlice';
 
 const SearchInput = () => {
 	const dispatch = useAppDispatch();

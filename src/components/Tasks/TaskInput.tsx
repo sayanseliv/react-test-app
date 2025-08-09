@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
-import { addTask } from '../../store/tasksSlice';
+import { addTask } from '../../store/features/tasks/tasksSlice';
 
 const TaskInput = () => {
 	const [task, setTask] = useState('');

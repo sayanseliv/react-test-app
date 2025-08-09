@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import type { ProjectsState, Project } from '../types/projects';
-import { supabase } from '../services/supabaseClient';
+import type { ProjectsState, Project } from '../../../types/projects';
+import { supabase } from '../../../services/supabaseClient';
 
 const initialState: ProjectsState = {
 	projects: [],

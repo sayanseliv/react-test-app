@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { increment, decrement, incrementByAmount } from '../store/counterSlice';
+import { increment, decrement, incrementByAmount } from '../store/features/counter/counterSlice';
 import Modal from '../components/Modal/Modal';
 
 const Home = () => {

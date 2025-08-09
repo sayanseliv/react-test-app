@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState, AppDispatch } from '../store';
-import { getUserByIdThunk } from '../store/usersThunks';
-import { clearCurrentUser } from '../store/usersSlice';
+import { getUserByIdThunk } from '../store/features/users/usersThunks';
+import { clearCurrentUser } from '../store/features/users/usersSlice';
 
 const ListDetails = () => {
 	const { id } = useParams();

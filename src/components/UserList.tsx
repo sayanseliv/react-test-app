@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { getUsers, setLoading, setError } from '../store/usersSlice';
+import { getUsers, setLoading, setError } from '../store/features/users/usersSlice';
 
 const URL = 'https://jsonplaceholder.typicode.com/users';
 

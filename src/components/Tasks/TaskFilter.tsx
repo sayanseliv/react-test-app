@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { setFilter } from '../../store/filterSlice';
+import { setFilter } from '../../store/features/tasks/filterSlice';
 import type { Filter } from '../../types/tasks';
 import type { RootState } from '../../store';
 

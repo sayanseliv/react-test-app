@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import type { User } from '../types/users';
+import type { User } from '../../../types/users';
 
 export const getUserByIdThunk = createAsyncThunk<User, number, { rejectValue: string }>(
 	'users/getUserById',

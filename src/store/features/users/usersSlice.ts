@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { UsersState, User } from '../types/users';
+import type { UsersState, User } from '../../../types/users';
 import { getUserByIdThunk } from './usersThunks';
 
 const initialState: UsersState = {

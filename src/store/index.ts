@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counterSlice';
-import usersReducer from './usersSlice';
-import tasksReducer from './tasksSlice';
-import filterReducer from './filterSlice';
-import projectsReducer from './projectsSlice';
+import counterReducer from './features/counter/counterSlice';
+import usersReducer from './features/users/usersSlice';
+import tasksReducer from './features/tasks/tasksSlice';
+import filterReducer from './features/tasks/filterSlice';
+import projectsReducer from './features/projects/projectsSlice';
 
 export const store = configureStore({
 	reducer: {
