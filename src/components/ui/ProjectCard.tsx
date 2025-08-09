@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import type { Project } from '../../types/projects';
+import { memo } from 'react';
 
 interface ProjectCardProps {
 	project: Project;
 }
 
-export const ProjectCard = ({ project }: ProjectCardProps) => {
+export const ProjectCard = memo(({ project }: ProjectCardProps) => {
 	const statusColors = {
 		active: 'bg-green-100 text-green-800',
 		completed: 'bg-blue-100 text-blue-800',
@@ -79,4 +80,4 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
 			</div>
 		</motion.div>
 	);
-};
+});

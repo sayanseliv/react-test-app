@@ -7,7 +7,7 @@ const List = lazy(() => import('./pages/List'));
 const ListDetails = lazy(() => import('./pages/ListDetails'));
 const Tasks = lazy(() => import('./pages/Tasks'));
 const Projects = lazy(() => import('./pages/Projects'));
-const ProjectsDetails = lazy(() => import('./pages/ProjectsDetails'));
+const ProjectsDetails = lazy(() => import('./pages/ProjectDetails'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
