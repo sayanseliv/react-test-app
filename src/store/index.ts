@@ -3,7 +3,8 @@ import counterReducer from './features/counter/counterSlice';
 import usersReducer from './features/users/usersSlice';
 import tasksReducer from './features/tasks/tasksSlice';
 import filterReducer from './features/tasks/filterSlice';
-import projectsReducer from './features/projects/projectsSlice';
+// import projectsReducer from './features/projects/projectsSlice';
+import { projectsApi } from './api/projectsApi';
 
 export const store = configureStore({
 	reducer: {
@@ -11,8 +12,14 @@ export const store = configureStore({
 		users: usersReducer,
 		tasks: tasksReducer,
 		filter: filterReducer,
-		projects: projectsReducer,
+		[projectsApi.reducerPath]: projectsApi.reducer,
 	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: ['persist/PERSIST'],
+			},
+		}).concat(projectsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

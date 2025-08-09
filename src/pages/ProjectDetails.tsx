@@ -1,39 +1,15 @@
-import { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 
-import type { AppDispatch } from '../store';
-import {
-	selectCurrentProject,
-	selectProjectsError,
-	selectProjectsLoading,
-} from '../store/selectors/projectsSelectors';
-import { clearCurrentProject, fetchProjectById } from '../store/features/projects/projectsSlice';
+import { useProject } from '../hooks/useProjects';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
 
 const ProjectDetails = () => {
 	const { id } = useParams<{ id: string }>();
-	const dispatch = useDispatch<AppDispatch>();
-	const project = useSelector(selectCurrentProject);
-	const loading = useSelector(selectProjectsLoading);
-	const error = useSelector(selectProjectsError);
+	const projectId = Number(id);
 
-	useEffect(() => {
-		if (id) {
-			dispatch(fetchProjectById(Number(id)));
-		}
-		return () => {
-			dispatch(clearCurrentProject());
-		};
-	}, [dispatch, id]);
-
-	const handleRetry = () => {
-		if (id) {
-			dispatch(fetchProjectById(Number(id)));
-		}
-	};
+	const { project, loading, error, refetch } = useProject(projectId);
 
 	if (loading) {
 		return (
@@ -48,7 +24,7 @@ const ProjectDetails = () => {
 	if (error) {
 		return (
 			<div className='min-h-screen flex items-center justify-center p-4'>
-				<ErrorMessage message={error} onRetry={handleRetry} />
+				<ErrorMessage message={error} onRetry={refetch} />
 			</div>
 		);
 	}

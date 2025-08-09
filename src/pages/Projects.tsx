@@ -1,31 +1,12 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
+import { useProjects } from '../hooks/useProjects';
 
-import { fetchProjects } from '../store/features/projects/projectsSlice';
-import {
-	selectProjects,
-	selectProjectsError,
-	selectProjectsLoading,
-} from '../store/selectors/projectsSelectors';
 import { ProjectCard } from '../components/ui/ProjectCard';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
-import type { AppDispatch } from '../store';
 
 const Projects = () => {
-	const dispatch = useDispatch<AppDispatch>();
-	const projects = useSelector(selectProjects);
-	const loading = useSelector(selectProjectsLoading);
-	const error = useSelector(selectProjectsError);
-
-	useEffect(() => {
-		dispatch(fetchProjects());
-	}, [dispatch]);
-
-	const handleRetry = () => {
-		dispatch(fetchProjects());
-	};
+	const { projects, loading, error, refetch } = useProjects();
 
 	if (loading) {
 		return (
@@ -41,7 +22,7 @@ const Projects = () => {
 	if (error) {
 		return (
 			<div className='min-h-screen flex items-center justify-center p-4'>
-				<ErrorMessage message={error} onRetry={handleRetry} />
+				<ErrorMessage message={error} onRetry={refetch} />
 			</div>
 		);
 	}
