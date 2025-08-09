@@ -4,12 +4,19 @@ import { motion } from 'framer-motion';
 import { useProject } from '../hooks/useProjects';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import { ErrorMessage } from '../components/ui/ErrorMessage';
+import { HiTrash } from 'react-icons/hi';
+import { useState } from 'react';
+import Modal from '../components/Modal/Modal';
 
 const ProjectDetails = () => {
+	const [isShowModal, setIsShowModal] = useState<boolean>(false);
 	const { id } = useParams<{ id: string }>();
 	const projectId = Number(id);
 
 	const { project, loading, error, refetch } = useProject(projectId);
+	const openModal = () => setIsShowModal(true);
+	const closeModal = () => setIsShowModal(false);
+	const deleteProject = () => {};
 
 	if (loading) {
 		return (
@@ -51,95 +58,121 @@ const ProjectDetails = () => {
 	};
 
 	return (
-		<motion.div
-			initial={{ opacity: 0 }}
-			animate={{ opacity: 1 }}
-			transition={{ duration: 0.5 }}
-			className='min-h-screen bg-gray-50 py-12'>
-			<div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
-				<Link
-					to='/projects'
-					className='inline-flex items-center text-blue-600 hover:text-blue-700 mb-8'>
-					<svg
-						className='w-4 h-4 mr-2'
-						fill='none'
-						stroke='currentColor'
-						viewBox='0 0 24 24'>
-						<path
-							strokeLinecap='round'
-							strokeLinejoin='round'
-							strokeWidth={2}
-							d='M15 19l-7-7 7-7'
-						/>
-					</svg>
-					Back to Projects
-				</Link>
+		<>
+			<motion.div
+				initial={{ opacity: 0 }}
+				animate={{ opacity: 1 }}
+				transition={{ duration: 0.5 }}
+				className='min-h-screen bg-gray-50 py-12'>
+				<div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8'>
+					<Link
+						to='/projects'
+						className='inline-flex items-center text-blue-600 hover:text-blue-700 mb-8'>
+						<svg
+							className='w-4 h-4 mr-2'
+							fill='none'
+							stroke='currentColor'
+							viewBox='0 0 24 24'>
+							<path
+								strokeLinecap='round'
+								strokeLinejoin='round'
+								strokeWidth={2}
+								d='M15 19l-7-7 7-7'
+							/>
+						</svg>
+						Back to Projects
+					</Link>
 
-				<motion.div
-					initial={{ y: 20, opacity: 0 }}
-					animate={{ y: 0, opacity: 1 }}
-					transition={{ duration: 0.6 }}
-					className='bg-white rounded-lg shadow-lg overflow-hidden'>
-					<div className='px-8 py-6 border-b border-gray-200'>
-						<div className='flex items-start justify-between'>
+					<motion.div
+						initial={{ y: 20, opacity: 0 }}
+						animate={{ y: 0, opacity: 1 }}
+						transition={{ duration: 0.6 }}
+						className='bg-white rounded-lg shadow-lg overflow-hidden'>
+						<div className='px-8 py-6 border-b border-gray-200'>
+							<div className='flex items-start justify-between'>
+								<div>
+									<h1 className='text-3xl font-bold text-gray-900 mb-2'>
+										{project.name}
+									</h1>
+									<p className='text-gray-600'>
+										Created: {new Date(project.created_at).toLocaleDateString()}
+									</p>
+								</div>
+								<div className='flex items-center gap-2'>
+									<span
+										className={`px-3 py-1 text-sm font-medium rounded-full ${
+											statusColors[project.status]
+										}`}>
+										{project.status}
+									</span>
+									<HiTrash
+										className='w-5 h-5 text-red-500 cursor-pointer hover:text-red-700'
+										onClick={openModal}
+									/>
+								</div>
+							</div>
+						</div>
+
+						<div className='px-8 py-6'>
+							{project.description && (
+								<div className='mb-8'>
+									<h2 className='text-xl font-semibold text-gray-900 mb-3'>
+										Description
+									</h2>
+									<p className='text-gray-700 leading-relaxed'>
+										{project.description}
+									</p>
+								</div>
+							)}
+
 							<div>
-								<h1 className='text-3xl font-bold text-gray-900 mb-2'>
-									{project.name}
-								</h1>
-								<p className='text-gray-600'>
-									Created: {new Date(project.created_at).toLocaleDateString()}
-								</p>
-							</div>
-							<span
-								className={`px-3 py-1 text-sm font-medium rounded-full ${
-									statusColors[project.status]
-								}`}>
-								{project.status}
-							</span>
-						</div>
-					</div>
-
-					<div className='px-8 py-6'>
-						{project.description && (
-							<div className='mb-8'>
-								<h2 className='text-xl font-semibold text-gray-900 mb-3'>
-									Description
+								<h2 className='text-xl font-semibold text-gray-900 mb-4'>
+									Team Members
 								</h2>
-								<p className='text-gray-700 leading-relaxed'>
-									{project.description}
-								</p>
-							</div>
-						)}
-
-						<div>
-							<h2 className='text-xl font-semibold text-gray-900 mb-4'>
-								Team Members
-							</h2>
-							<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-								{project.team.map((member) => (
-									<motion.div
-										key={member.id}
-										initial={{ opacity: 0, scale: 0.95 }}
-										animate={{ opacity: 1, scale: 1 }}
-										transition={{ duration: 0.3 }}
-										className='flex items-center space-x-3 p-4 bg-gray-50 rounded-lg'>
-										<div className='w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center text-white font-medium'>
-											{member.name.charAt(0).toUpperCase()}
-										</div>
-										<div>
-											<h3 className='font-medium text-gray-900'>
-												{member.name}
-											</h3>
-											<p className='text-sm text-gray-600'>{member.role}</p>
-										</div>
-									</motion.div>
-								))}
+								<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+									{project.team.map((member) => (
+										<motion.div
+											key={member.id}
+											initial={{ opacity: 0, scale: 0.95 }}
+											animate={{ opacity: 1, scale: 1 }}
+											transition={{ duration: 0.3 }}
+											className='flex items-center space-x-3 p-4 bg-gray-50 rounded-lg'>
+											<div className='w-10 h-10 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center text-white font-medium'>
+												{member.name.charAt(0).toUpperCase()}
+											</div>
+											<div>
+												<h3 className='font-medium text-gray-900'>
+													{member.name}
+												</h3>
+												<p className='text-sm text-gray-600'>
+													{member.role}
+												</p>
+											</div>
+										</motion.div>
+									))}
+								</div>
 							</div>
 						</div>
-					</div>
-				</motion.div>
-			</div>
-		</motion.div>
+					</motion.div>
+				</div>
+			</motion.div>
+			<Modal show={isShowModal} onClose={closeModal}>
+				Are you sure you want to delete the project?
+				<div className='flex align-center gap-4 justify-center mt-4'>
+					<button
+						onClick={deleteProject}
+						type='button'
+						className='py-2 px-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 transition-colors cursor-pointer'>
+						Yes
+					</button>
+					<button
+						onClick={closeModal}
+						className='py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors cursor-pointer'>
+						Close
+					</button>
+				</div>
+			</Modal>
+		</>
 	);
 };
 export default ProjectDetails;
