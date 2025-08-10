@@ -1,4 +1,9 @@
 @import 'tailwindcss';
+@layer base {
+	button {
+		@apply cursor-pointer;
+	}
+}
 @theme {
 	--animate-jump: jump 0.6s ease-in-out infinite;
 	@keyframes jump {

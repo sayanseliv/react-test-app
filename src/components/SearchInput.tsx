@@ -24,7 +24,7 @@ const SearchInput = () => {
 			{searchQuery.length > 0 && (
 				<button
 					onClick={onReset}
-					className='mt-2 self-start px-3 py-1 border border-solid border-neutral-950 rounded-lg text-sm font-medium hover:border-sky-700 hover:text-sky-600 focus:outline focus:outline-sky-700 transition-colors duration-150 cursor-pointer'>
+					className='mt-2 self-start px-3 py-1 border border-solid border-neutral-950 rounded-lg text-sm font-medium hover:border-sky-700 hover:text-sky-600 focus:outline focus:outline-sky-700 transition-colors duration-150'>
 					Reset
 				</button>
 			)}

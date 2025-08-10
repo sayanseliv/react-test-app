@@ -26,25 +26,25 @@ const Home = () => {
 				<div className='space-x-4'>
 					<button
 						onClick={onDecrement}
-						className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+						className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors'>
 						-
 					</button>
 
 					<button
 						onClick={onIncrement}
-						className='bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+						className='bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition-colors'>
 						+
 					</button>
 
 					<button
 						onClick={() => dispatch(incrementByAmount(5))}
-						className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+						className='bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors'>
 						+5
 					</button>
 				</div>
 				<button
 					onClick={toggleModal}
-					className='mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+					className='mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors'>
 					Call Modal
 				</button>
 
@@ -53,7 +53,7 @@ const Home = () => {
 					<p>Это модальное окно с анимацией 🎉</p>
 					<button
 						onClick={closeModal}
-						className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors cursor-pointer'>
+						className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-colors'>
 						Закрыть
 					</button>
 				</Modal>

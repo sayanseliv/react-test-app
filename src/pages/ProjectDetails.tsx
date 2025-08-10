@@ -1,5 +1,6 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { toast } from 'react-hot-toast';
 
 import { useProject } from '../hooks/useProjects';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
@@ -7,16 +8,60 @@ import { ErrorMessage } from '../components/ui/ErrorMessage';
 import { HiTrash } from 'react-icons/hi';
 import { useState } from 'react';
 import Modal from '../components/Modal/Modal';
+import { useDeleteProjectMutation } from '../store/api/projectsApi';
 
 const ProjectDetails = () => {
 	const [isShowModal, setIsShowModal] = useState<boolean>(false);
+	const [isDeleting, setIsDeleting] = useState<boolean>(false);
 	const { id } = useParams<{ id: string }>();
 	const projectId = Number(id);
+	const navigate = useNavigate();
 
 	const { project, loading, error, refetch } = useProject(projectId);
+	const [deleteProject] = useDeleteProjectMutation();
+
 	const openModal = () => setIsShowModal(true);
-	const closeModal = () => setIsShowModal(false);
-	const deleteProject = () => {};
+	const closeModal = () => {
+		setIsShowModal(false);
+		setIsDeleting(false);
+	};
+
+	const goBackOrHome = () => {
+		if (window.history.length > 1) {
+			navigate(-1);
+		} else {
+			navigate('/projects');
+		}
+	};
+
+	const handleConfirmDelete = async () => {
+		setIsDeleting(true);
+		try {
+			const result = await deleteProject(projectId).unwrap();
+
+			if (result.success) {
+				toast.success(result.message || 'Project deleted successfully!');
+
+				closeModal();
+				goBackOrHome();
+			} else {
+				toast.error('Failed to delete project');
+				setIsDeleting(false);
+			}
+		} catch (error) {
+			console.error('Failed to delete project:', error);
+
+			let errorMessage = 'Failed to delete project';
+
+			if (error && typeof error === 'object') {
+				const apiError = error as { data?: string; message?: string };
+				errorMessage = apiError.data || apiError.message || errorMessage;
+			}
+
+			toast.error(errorMessage);
+			setIsDeleting(false);
+		}
+	};
 
 	if (loading) {
 		return (
@@ -105,10 +150,13 @@ const ProjectDetails = () => {
 										}`}>
 										{project.status}
 									</span>
-									<HiTrash
-										className='w-5 h-5 text-red-500 cursor-pointer hover:text-red-700'
+									<button
 										onClick={openModal}
-									/>
+										disabled={isDeleting}
+										className='p-2 text-red-500 hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed'
+										title='Delete project'>
+										<HiTrash className='w-5 h-5' />
+									</button>
 								</div>
 							</div>
 						</div>
@@ -157,17 +205,18 @@ const ProjectDetails = () => {
 				</div>
 			</motion.div>
 			<Modal show={isShowModal} onClose={closeModal}>
-				Are you sure you want to delete the project?
+				Are you sure you want to delete "<strong>{project.name}</strong>"? This action
+				cannot be undone.
 				<div className='flex align-center gap-4 justify-center mt-4'>
 					<button
-						onClick={deleteProject}
+						onClick={handleConfirmDelete}
 						type='button'
-						className='py-2 px-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 transition-colors cursor-pointer'>
+						className='py-2 px-4 focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 transition-colors'>
 						Yes
 					</button>
 					<button
 						onClick={closeModal}
-						className='py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors cursor-pointer'>
+						className='py-2 px-4 bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors'>
 						Close
 					</button>
 				</div>
