@@ -25,7 +25,7 @@ export const ProjectCard = memo(({ project }: ProjectCardProps) => {
 				transition: { duration: 0.3, ease: 'easeInOut' },
 			}}
 			className='bg-white rounded-lg shadow-md border border-gray-300 overflow-hidden'>
-			<div className='flex flex-col justify-between h-full p-6'>
+			<div className='flex flex-col justify-between h-full p-4'>
 				<div className='flex items-center justify-between mb-4'>
 					<h3 className='text-xl font-semibold text-gray-900 truncate'>{project.name}</h3>
 					<span
@@ -40,12 +40,12 @@ export const ProjectCard = memo(({ project }: ProjectCardProps) => {
 					<p className='text-gray-600 text-sm mb-4 line-clamp-2'>{project.description}</p>
 				)}
 
-				<div className='flex items-center justify-between'>
+				<div className='flex items-center justify-between gap-2'>
 					<div className='flex items-center space-x-2'>
 						<div className='flex -space-x-2'>
-							{project.team.slice(0, 3).map((member) => (
+							{project.team.slice(0, 3).map((member, index) => (
 								<div
-									key={member.id}
+									key={`${project.id}-member-${index}-${member.name}`}
 									className='w-8 h-8 bg-gradient-to-br from-blue-400 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-medium border-2 border-white'
 									title={member.name}>
 									{member.name.charAt(0).toUpperCase()}

@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import { lazy } from 'react';
+import EditProjects from './pages/EditProjects';
 
 const Home = lazy(() => import('./pages/Home'));
 const List = lazy(() => import('./pages/List'));
@@ -21,6 +22,7 @@ function App() {
 				<Route path='/projects' element={<Projects />}></Route>
 				<Route path='/projects/add' element={<AddProject />}></Route>
 				<Route path='/projects/:id' element={<ProjectsDetails />}></Route>
+				<Route path='/projects/:id/edit' element={<EditProjects />}></Route>
 				<Route path='/tasks' element={<Tasks />}></Route>
 				<Route path='*' element={<NotFound />} />
 			</Route>
