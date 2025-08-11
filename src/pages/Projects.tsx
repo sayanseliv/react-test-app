@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useProjects } from '../hooks/useProjects';
+import { HiPlus } from 'react-icons/hi';
 
 import { ProjectCard } from '../components/ui/ProjectCard';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
@@ -55,12 +57,28 @@ const Projects = () => {
 							No Projects Yet
 						</h3>
 						<p className='text-gray-600'>Start by creating your first project!</p>
+						<Link
+							to='/projects/add'
+							className='inline-flex items-center px-6 py-3 mt-5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
+							<HiPlus className='w-5 h-5 mr-2' />
+							Create Your First Project
+						</Link>
 					</motion.div>
 				) : (
-					<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
-						{projects.map((project) => (
-							<ProjectCard key={project.id} project={project} />
-						))}
+					<div>
+						<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+							{projects.map((project) => (
+								<ProjectCard key={project.id} project={project} />
+							))}
+						</div>
+						<div className='flex mt-8'>
+							<Link
+								to='/projects/add'
+								className='inline-flex items-center px-6 py-3 mx-auto bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors'>
+								<HiPlus className='w-5 h-5 mr-2' />
+								Add Project
+							</Link>
+						</div>
 					</div>
 				)}
 			</div>
