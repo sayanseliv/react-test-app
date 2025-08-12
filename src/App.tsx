@@ -10,6 +10,7 @@ const Tasks = lazy(() => import('./pages/Tasks'));
 const Projects = lazy(() => import('./pages/Projects'));
 const ProjectsDetails = lazy(() => import('./pages/ProjectDetails'));
 const AddProject = lazy(() => import('./pages/AddProject'));
+const RandomUsers = lazy(() => import('./pages/RandomUsers'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 				<Route path='/projects/:id' element={<ProjectsDetails />}></Route>
 				<Route path='/projects/:id/edit' element={<EditProjects />}></Route>
 				<Route path='/tasks' element={<Tasks />}></Route>
+				<Route path='/random-users' element={<RandomUsers />}></Route>
 				<Route path='*' element={<NotFound />} />
 			</Route>
 		</Routes>

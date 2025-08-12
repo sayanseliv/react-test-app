@@ -3,6 +3,7 @@ import counterReducer from './features/counter/counterSlice';
 import usersReducer from './features/users/usersSlice';
 import tasksReducer from './features/tasks/tasksSlice';
 import filterReducer from './features/tasks/filterSlice';
+import randomUsersReducer from './features/randomUsers/randomUsersSlice';
 import { projectsApi } from './api/projectsApi';
 
 export const store = configureStore({
@@ -12,6 +13,7 @@ export const store = configureStore({
 		tasks: tasksReducer,
 		filter: filterReducer,
 		[projectsApi.reducerPath]: projectsApi.reducer,
+		randomUsers: randomUsersReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({

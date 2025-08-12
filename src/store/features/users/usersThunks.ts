@@ -15,7 +15,7 @@ export const getUserByIdThunk = createAsyncThunk<User, number, { rejectValue: st
 			return data;
 		} catch (error) {
 			console.error('getUserByIdThunk error:', error);
-			return rejectWithValue(error instanceof Error ? error.message : 'Failed to fetch user');
+			return rejectWithValue('Failed to fetch user');
 		}
 	}
 );

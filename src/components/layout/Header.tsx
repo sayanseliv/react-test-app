@@ -18,6 +18,9 @@ const Header = () => (
 			<NavLink to='/projects' className={getNavLinkClass}>
 				Projects
 			</NavLink>
+			<NavLink to='/random-users' className={getNavLinkClass}>
+				Users
+			</NavLink>
 		</nav>
 	</header>
 );
