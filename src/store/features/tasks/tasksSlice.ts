@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-import type { Task } from '../types/tasks';
+import type { Task } from '../../../types/tasks';
 
 const initialState: Task[] = [
 	{
